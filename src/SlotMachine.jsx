@@ -51,7 +51,6 @@ export default function SlotMachine({ categories }) {
     }, SPIN_TIME);
   }
 
-  /* ✅ NEW — reroll same category */
   function reroll() {
     if (spinning) return;
     setPendingWinner(null);
@@ -80,7 +79,6 @@ export default function SlotMachine({ categories }) {
     <div className="slot-wrapper">
       {isComplete ? (
         <div className="complete-screen">
-
           <h2>Character Complete!</h2>
 
           <input
@@ -110,56 +108,65 @@ export default function SlotMachine({ categories }) {
               Print / Export PDF
             </button>
           </div>
-
         </div>
       ) : (
         <>
-          <h2 className="category-title">
-            {currentWheel.label}
-          </h2>
+          {/* ✅ FIXED SPINNER REGION */}
+          <div className="spinner-stage">
+            <h2 className="category-title">
+              {currentWheel.label}
+            </h2>
 
-          <div className={`slot-window ${pendingWinner ? "winner-glow" : ""}`}>
             <div
-              className="slot-track"
-              style={{
-                transform: `translateY(-${offset}px)`,
-                transition: spinning
-                  ? `transform ${SPIN_TIME}ms cubic-bezier(.15,.8,.25,1)`
-                  : "none"
-              }}
+              className={`slot-window ${
+                pendingWinner ? "winner-glow" : ""
+              }`}
             >
-              {displayList.map((opt, i) => (
-                <div key={i} className="slot-item">
-                  {opt}
+              <div
+                className="slot-track"
+                style={{
+                  transform: `translateY(-${offset}px)`,
+                  transition: spinning
+                    ? `transform ${SPIN_TIME}ms cubic-bezier(.15,.8,.25,1)`
+                    : "none"
+                }}
+              >
+                {displayList.map((opt, i) => (
+                  <div key={i} className="slot-item">
+                    {opt}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {!pendingWinner && (
+              <button onClick={spin} disabled={spinning}>
+                {spinning ? "Rolling..." : "Spin"}
+              </button>
+            )}
+
+            {pendingWinner && (
+              <div className="result-actions">
+                <button className="reroll-btn" onClick={reroll}>
+                  Reroll
+                </button>
+
+                <button onClick={confirmResult}>
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* ✅ RESULTS LIVE OUTSIDE SPINNER FLOW */}
+          <div className="results-area">
+            <div className="results-list">
+              {results.map((r, i) => (
+                <div key={i}>
+                  {r.label}: {r.value}
                 </div>
               ))}
             </div>
-          </div>
-
-          {!pendingWinner && (
-            <button onClick={spin} disabled={spinning}>
-              {spinning ? "Rolling..." : "Spin"}
-            </button>
-          )}
-
-          {pendingWinner && (
-            <div className="result-actions">
-              <button className="reroll-btn" onClick={reroll}>
-                Reroll
-              </button>
-
-              <button onClick={confirmResult}>
-                Next
-              </button>
-            </div>
-          )}
-
-          <div className="results-list">
-            {results.map((r, i) => (
-              <div key={i}>
-                {r.label}: {r.value}
-              </div>
-            ))}
           </div>
         </>
       )}
