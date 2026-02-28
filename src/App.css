@@ -1,0 +1,435 @@
+/* ===== Reset ===== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #111827;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* main container */
+.app {
+  width: 100%;
+  max-width: 900px;
+  padding: 3rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* =======================================================
+   SETUP SCREEN
+======================================================= */
+
+.setup-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.setup-screen h1 {
+  font-size: 2rem;
+  font-weight: 650;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+/* category card */
+
+.category-block {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* category header row */
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* items */
+
+.item-row {
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+}
+
+/* delete buttons */
+
+.delete-btn {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+  opacity: 0.7;
+}
+
+/* setup buttons */
+
+.setup-screen button {
+  align-self: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  background: #ff0081;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.setup-screen button:hover {
+  background: #ff77ac;
+}
+
+.setup-screen .delete-btn {
+  background: transparent;
+
+}
+
+.setup-screen .delete-btn:hover {
+ background: #ffedee;
+}
+
+.setup-screen .category-input {
+  width: 100%;
+  height: 40px;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffedee;
+  color: black
+}
+
+.setup-screen .item-input {
+  width: 100%;
+  height: 30px;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  color: black
+}
+
+/* primary start button */
+
+.start-btn {
+  margin-top: 1rem;
+  background: #ff0081;
+  color: white;
+  font-weight: 600;
+  width: 90%;
+  height: 48px;
+  font-size: 1.5rem;
+
+}
+
+.start-btn:hover {
+  background: #ff77ac;
+}
+
+/* =======================================================
+   SLOT MACHINE
+======================================================= */
+
+.slot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  min-height: 420px; /* reserves space so layout doesn't shift */
+  justify-content: center;
+}
+
+/* visible window */
+
+.slot-window {
+  width: 340px;
+  height: 72px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  position: relative;
+}
+
+/* center highlight lines */
+
+.slot-window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 2px solid #ff0081;
+  border-bottom: 2px solid #ff0081;
+  pointer-events: none;
+}
+
+/* winner glow */
+
+.winner-glow {
+  box-shadow:
+    0 0 0 2px #ff0081,
+    0 0 18px rgba(255,0,129,0.45);
+}
+
+/* scrolling column */
+
+.slot-track {
+  display: flex;
+  flex-direction: column;
+}
+
+/* items */
+
+.slot-item {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 550;
+}
+
+/* spin button */
+
+.slot-wrapper button {
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  border: none;
+  background: #ff0081;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.slot-wrapper button:hover:not(:disabled) {
+  background: #ff77ac;
+}
+
+.slot-wrapper button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* =======================================================
+   RESULTS LIST
+======================================================= */
+
+.results-list {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.results-list div {
+  background: white;
+  border-radius: 10px;
+  padding: 0.5rem 0.9rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.category-block {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.dropdown-arrow {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid #e5e7eb;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item-input, .category-input {
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.item-input:focus, .category-input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.add-item-btn, .add-category-btn {
+  background: #e5e7eb;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.add-item-btn:hover, .add-category-btn:hover {
+  background: #d1d5db;
+}
+
+/* ===============================
+   CHARACTER COMPLETE SCREEN
+================================ */
+
+.complete-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.character-summary {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.summary-row {
+  padding: 0.35rem 0;
+  font-size: 1rem;
+}
+
+.notes-box {
+  width: 100%;
+  min-height: 140px;
+  resize: vertical;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  color: black;
+  background-color: #ffedee;
+}
+
+.character-name {
+   width: 100%;
+    min-height: 40px;
+  resize: vertical;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  color: black;
+  background-color: #ffedee;
+}
+.export-actions button {
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  border: none;
+  background: #ff0081;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media print {
+
+  body {
+    background: white;
+  }
+
+  button {
+    display: none;
+  }
+
+  .app-header {
+    display: none;
+  }
+
+  .complete-screen {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .notes-box, .character-name {
+    border: 1px solid #000;
+  }
+}
